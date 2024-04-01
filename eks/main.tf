@@ -43,6 +43,107 @@ resource "aws_iam_policy_attachment" "eks_cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy" 
 
 } 
+resource "aws_iam_policy" "kubernetes_deployments_policy" {
+  name        = "kubernetes_deployments_policy"
+  description = "IAM policy for performing kubectl apply operations for deployments in a specific namespace"
+  
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect = "Allow",
+      Action = [
+        "eks:DescribeCluster",
+        "eks:ListClusters",
+        "eks:ListUpdates",
+        "eks:UpdateClusterVersion",
+        "eks:CreateNodegroup",
+        "eks:DeleteNodegroup",
+        "eks:UpdateNodegroupConfig",
+        "eks:UpdateNodegroupVersion",
+        "eks:DescribeNodegroup",
+        "eks:ListNodegroups",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:DescribeUpdate",
+        "eks:DescribeAddon",
+        "eks:DescribeAddonVersions",
+        "eks:DescribeClusterConfig",
+        "eks:ListFargateProfiles",
+        "eks:ListIdentityProviderConfigs",
+        "eks:ListAddons",
+        "eks:DescribeFargateProfile",
+        "eks:DescribeIdentityProviderConfig",
+        "eks:DescribeAddonVersion",
+        "eks:ListClusters",
+        "eks:ListUpdates",
+        "eks:UpdateClusterVersion",
+        "eks:CreateAddon",
+        "eks:DeleteAddon",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:ListFargateProfiles",
+        "eks:ListIdentityProviderConfigs",
+        "eks:ListAddons",
+        "eks:DescribeAddonVersions",
+        "eks:DescribeAddon",
+        "eks:DescribeClusterConfig",
+        "eks:DescribeIdentityProviderConfig",
+        "eks:ListClusters",
+        "eks:ListUpdates",
+        "eks:UpdateClusterVersion",
+        "eks:CreateAddon",
+        "eks:DeleteAddon",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:ListFargateProfiles",
+        "eks:ListIdentityProviderConfigs",
+        "eks:ListAddons",
+        "eks:DescribeAddonVersions",
+        "eks:DescribeAddon",
+        "eks:DescribeClusterConfig",
+        "eks:DescribeIdentityProviderConfig",
+        "eks:ListClusters",
+        "eks:ListUpdates",
+        "eks:UpdateClusterVersion",
+        "eks:CreateAddon",
+        "eks:DeleteAddon",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:ListFargateProfiles",
+        "eks:ListIdentityProviderConfigs",
+        "eks:ListAddons",
+        "eks:DescribeAddonVersions",
+        "eks:DescribeAddon",
+        "eks:DescribeClusterConfig",
+        "eks:DescribeIdentityProviderConfig",
+        "eks:ListClusters",
+        "eks:ListUpdates",
+        "eks:UpdateClusterVersion",
+        "eks:CreateAddon",
+        "eks:DeleteAddon",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "eks:ListFargateProfiles",
+        "eks:ListIdentityProviderConfigs",
+        "eks:ListAddons",
+        "eks:DescribeAddonVersions",
+        "eks:DescribeAddon",
+        "eks:DescribeClusterConfig",
+        "eks:DescribeIdentityProviderConfig"
+      ],
+      Resource = ["*"]
+    }]
+  })
+}
+
+
+resource "aws_iam_role_policy_attachment" "attach_kubernetes_policy" {
+  role       = aws_iam_role.example.name
+  policy_arn = aws_iam_policy.kubernetes_deployments_policy.arn
+}
+
+ 
+
 
   
 
@@ -191,5 +292,3 @@ resource "aws_eks_node_group" "example" {
   ] 
 
 } 
-
- 
