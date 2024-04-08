@@ -1,11 +1,5 @@
-
-
 resource "aws_iam_role" "eks_cluster" { 
-
   name = "eks-cluster-role" 
-
-  
-
   assume_role_policy = jsonencode({ 
 
     Version = "2012-10-17" 
@@ -135,11 +129,12 @@ resource "aws_iam_policy" "kubernetes_deployments_policy" {
     }]
   })
 }
+
+
 resource "aws_iam_role_policy_attachment" "attach_kubernetes_policy" {
-  role       = aws_iam_role.eks_cluster.name
+  role       = aws_iam_role.example.name
   policy_arn = aws_iam_policy.kubernetes_deployments_policy.arn
 }
-
 
  
 
